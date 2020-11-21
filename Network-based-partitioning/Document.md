@@ -34,23 +34,23 @@ There are two main steps:
 
 ### Input
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg" style="width:300px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg" style="width:200px;"/>
 
 Typical input: 
 
-	1.facilities: Manhattan Heath Facilites (https://data.cityofnewyork.us/Health/NYC-Health-Hospitals-patient-care-locations-2011/f7b6-v6v3/data)
+1.facilities: Manhattan Heath Facilites (https://data.cityofnewyork.us/Health/NYC-Health-Hospitals-patient-care-locations-2011/f7b6-v6v3/data)
 	
-	2.network: Manhattan street network(https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b)
+2.network: Manhattan street network(https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b)
 
 ### Process
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg" style="width:300px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg" style="width:200px;"/>
 
 ### Output
 
 Compare the result with theissen polygons.
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg" style="width:300px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg" style="width:200px;"/>
 
 black solid-line - Network-based Partitions
 
