@@ -34,7 +34,7 @@ There are two main steps:
 
 ### Input
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg" style="width:200px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg" width="300"/>
 
 Typical input: 
 
@@ -44,13 +44,13 @@ Typical input:
 
 ### Process
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg" style="width:200px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg" width="300"/>
 
 ### Output
 
 Compare the result with theissen polygons.
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg" style="width:200px;"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg" width="300"/>
 
 black solid-line - Network-based Partitions
 
