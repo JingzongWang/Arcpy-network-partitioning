@@ -17,25 +17,30 @@ There are two main steps:
 2. **Create partitions**: With these boundary points as barriers, create service area polygon for each facility, spatial join the facilities back to these areas and copy it to output file.
 
 ### Pseudo code:
- 1. Initialization
- 2. for each facility:
-  1.while can find route to any other facility:
-   1. find route to nearest facility
-   2. add mid point of the route as barriers
- 3. Solve service areas with boudary points as barriers
- 4. Spatial join service areas with facilities and copy to output file.
+1. Initialization
+2. for each facility:
+	1.while can find route to any other facility:
+		1. find route to nearest facility
+		2. add mid point of the route as barriers
+3. Solve service areas with boudary points as barriers
+4. Spatial join service areas with facilities and copy to output file.
 
 ## Example
 ### Input
-![img](https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg)
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-input.jpg" style="width:400px;"/>
+
 Typical input: 
-	facilities: Manhattan Heath Facilites (https://data.cityofnewyork.us/Health/NYC-Health-Hospitals-patient-care-locations-2011/f7b6-v6v3/data)
-	network: Manhattan street network(https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b)
+	1.facilities: Manhattan Heath Facilites (https://data.cityofnewyork.us/Health/NYC-Health-Hospitals-patient-care-locations-2011/f7b6-v6v3/data)
+	2.network: Manhattan street network(https://data.cityofnewyork.us/City-Government/NYC-Street-Centerline-CSCL-/exjm-f27b)
+
 ### Process
-![img](https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg)
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-process.jpg" style="width:400px;"/>
 ### Output
 Compare the result with theissen polygons.
-![img](https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg)
+
+<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Network-based-partitioning-result.jpg" style="width:400px;"/>
+
 black solid-line - Network-based Partitions
+
 pink dash-line - Thiessen Polygons
 
