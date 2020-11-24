@@ -1,7 +1,7 @@
 # Arcpy-network-partitioning
 Tools for solving different kinds of network partitioning problems in ArcGIS Pro
 ## Features
-* NetworkBasedPartitionning.py script creates a new shapefile or feature class of service areas for given facilities from a street network. These areas are sized based on proximity or other cost to facilities in the network.
+* [NetworkBasedPartitionning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/NetworkPartitioning.py) script creates a new shapefile or feature class of service areas for given facilities from a street network. These areas are sized based on proximity or other cost to facilities in the network.
 ## Instructions
 1. Download the latest release
 2. Modify the code to suit your needs
