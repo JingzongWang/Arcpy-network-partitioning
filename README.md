@@ -1,7 +1,8 @@
 # Arcpy-network-partitioning
 Tools for solving different kinds of network partitioning problems in ArcGIS Pro
 ## Features
-* [NetworkBasedPartitionning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/NetworkPartitioning.py) script creates a new shapefile or feature class of service areas for given facilities from a street network. These areas are sized based on proximity or other cost to facilities in the network.
+* [Distance_based_network_partitioning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/scripts/Distance_based_network_partitioning.py) This script creates a new shapefile or feature class of service areas for given facilities from a street network. These areas are sized based on proximity or other cost to facilities in the network.
+* [Capacity_based_network_partitionning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/scripts/Capacity_based_network_partitioning.py) This script creates a new shapefile of service areas for given facilities from a street network. These areas are sized based on each facility's capacity and areas' burden, as well as the proximity to facilities in the network.
 ## Instructions
 1. Download the latest release
 2. Modify the code to suit your needs
@@ -10,8 +11,10 @@ Tools for solving different kinds of network partitioning problems in ArcGIS Pro
 * ArcGIS Pro 2.5 or later
 * the Network Analyst extension license
 ## Documents
-* <a href = "https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/Network-based-partitioning/Document.md">Network-based-partitioning</a>
+* <a href = "https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/documents/Distance_based_network_partitioning.md">Distance_based_network_partitioning</a>
+* <a href = "https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/documents/Capacity_based_network_partitioning.md">Capacity_based_network_partitioning</a>
 
 ## Issues
 Please let me know if you find a bug by submitting an issue.
+
 ## <a href = "https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/LICENSE">Licensing</a>
