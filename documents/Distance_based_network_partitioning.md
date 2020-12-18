@@ -44,11 +44,13 @@ The overall workflow includes the two modules listed below:
 
 **Script**: [Distance_based_network_partitioning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/scripts/Distance_based_network_partitioning.py)
 
+
+
 ## Example
 
 ### Input
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/images/Distance-based-network-partitioning-input.jpg" width="300"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/images/Network-based-partitioning-input.jpg?raw=true" width="300"/>
 
 Typical input: images
 
@@ -58,13 +60,13 @@ Typical input: images
 
 ### Process
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/images/Distance-based-network-partitioning-process.jpg" width="300"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/images/Network-based-partitioning-process.jpg?raw=true" width="300"/>
 
 ### Output
 
 Compare the result with theissen polygons.
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/images/Distance-based-network-partitioning-result.jpg" width="300"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/images/Network-based-partitioning-result.jpg?raw=true" width="300"/>
 
 black solid-line - Network-based Partitions
 

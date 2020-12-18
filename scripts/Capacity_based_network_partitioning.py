@@ -30,6 +30,7 @@ try:
     for i in range(0, 12):
         arcpy.AddMessage(arcpy.GetParameterAsText(i))
 
+    # Sum up a column.
     def sum_col(fc, field_name):
         total = 0
         with arcpy.da.SearchCursor(fc, [field_name]) as search_rows:
@@ -37,6 +38,7 @@ try:
                 total += row[0]
         return total
 
+    # Distribute zones' burden to facilities.    
     def distr_burden(points, burden_field, facilities, capacity_field):
         total_burden = sum_col(points, burden_field)
         total_capacity = sum_col(facilities, capacity_field)
@@ -48,6 +50,7 @@ try:
                 row[1] = row[0] * ratio 
                 update_rows.updateRow(row)
 
+    # Distribute zones' burden to fishnet cells.
     def distribute_value(fc, ID, valueFieldName):
         #Add the count field
         arcpy.AddField_management(fc, 'VALUE', 'DOUBLE')
@@ -66,6 +69,7 @@ try:
                 row[2] = row[1] / counts[row[0]]
                 update_rows.updateRow(row)
 
+    # Create fishnet cells from input zones.           
     def create_fishnet(polygon, polyline, output_points, output_fishnet, size, valueField):
         arcpy.AddMessage("...creating fishnet from polygon.")
         # Create fishnet.
@@ -101,7 +105,7 @@ try:
         # Distribute value from each polygon to points
         distribute_value(output_points, arcpy.ListFields(output_points)[3].name, valueField)
           
-
+    # Calculate cost matrix from each fishnet cell to `num_to_find` closest facilities.
     def dist_matrix(fac, st_network, mode, direction, fishnet, num_to_find = 5):
         arcpy.AddMessage("...generating distance matrix")
 
@@ -164,7 +168,7 @@ try:
 
         return points_dict
 
-
+    # Initialize closest facility analysis.
     def initialize_find_rest(f, network, mode, direction, num_fac):
         # Initialize network analysis
         # Create a new closest facility analysis layer.
@@ -189,7 +193,7 @@ try:
         
         return closest_fac_lyr_obj, fac_join
 
-
+    # Find the distance from this point to all other facilities.
     def find_rest(targetID, fc, fc_dict, num, cf_obj, fac_join):
         # Sublayer names
         sublayer_names = arcpy.na.GetNAClassNames(cf_obj)
@@ -221,6 +225,7 @@ try:
             heapq.heappop(fc_dict[targetID][2])
             num -= 1  
 
+    # Assign a point to a facility. Check if the facility is overloaded.       
     def assign_to(c_id, c_dict, f_id, f_dict, d, q):
         fac = f_dict[int(f_id)]
         point = c_dict[int(c_id)]
@@ -229,6 +234,7 @@ try:
         point[1] = f_id
         if fac[1] > fac[0]: q.add(f_id)
 
+    # Dissociate a point from a facility.
     def remove_from(c_id, c_dict, f_id, f_dict):
         fac = f_dict[int(f_id)]
         point = c_dict[int(c_id)]
@@ -237,7 +243,8 @@ try:
         point[1] = None
         heapq.heappop(point[2])
 
-
+    # Assign fishnet cells to facilities with the goal of 
+    # assigning each facility appropriate burden and minimizing total cost.
     def assign_points(fac_layer, points_dict, fishnet, network, mode, direction, num_found):
         arcpy.AddMessage("...assign points to facilities")
 
@@ -385,6 +392,8 @@ try:
         arcpy.Delete_management(fishnet_points)
         arcpy.Delete_management(output_table)
         arcpy.Delete_management(temp_output)
+
+
 
     arcpy.env.workspace = workspace
     cap_based_nt_partitioning(inFacilities, inCapacityField, inZones, inBurdenField, 

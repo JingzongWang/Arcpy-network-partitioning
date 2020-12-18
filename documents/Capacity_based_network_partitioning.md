@@ -34,30 +34,32 @@ cap_based_nt_partitioning(facilities, fac_cap_field, zones, zones_burden_field, 
 The overall workflow includes the four modules listed below:
 
 * **Module 1 - Fishnet Creating Module**, which create fishnet cells from input zones.
-  * Create fishnet 
+  * Create fishnet. 
   * Filter out fishnet cells that are far from streets (200 meters) or out of zones.
-  * Distribute zones' burden to fishnet cells
+  * Distribute zones' burden to fishnet cells.
 * **Module 2 - Burden Distributing Module**, which distribute burden to facilities based on thier capacity.
-  * burden_of_fac_x  = capacity_of_fac_x / total_capacity * total_burden
+  * burden_of_fac_x  = capacity_of_fac_x / total_capacity * total_burden.
 
 * **Module 3 - Cost Matrix Caculating Module**, which calculate cost matrix from each fishnet cell to `num_to_find` closest facilities. For each fishnet cell, `num_to_find` closest facilities' IDs and distance to them will stored in a priority queue with distance as priority. 
 * **Module 4 - Cells Assigning Module**, which assign cells to facilities with the goal of assigning each facility appropriate burden and minimizing total cost.
   * Assign each fishnet cell to its nearest facility, check if the facility is overloaded.
   * Move cells from overloaded facilities to underloaded faciities.
-    * while there is any overloaded facility
+    * while there is any overloaded facility:
       * for each cell belonging to this facility, calculate the difference between the distance to this facility and to next closest facility. (If no next closest facility found in list, try to find rest of facilities)
       * while the facility is overloaded, pop the cell with the least difference in distance, and move it to next closest facility if the facility is underloaded.
       * check whether the facility is still overloaded.
-  * Sum up actual assigned burden for each facility
+  * Sum up actual assigned burden for each facility.
 * **Module 5 - Service Area Creating Module**, which dissolves fishnet cells by facility ID as service areas for facilities.
 
 **Script**: [Capacity_based_network_partitionning.py](https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/scripts/Capacity_based_network_partitioning.py)
+
+
 
 ## Example
 
 ### Input
 
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/images/Capacity-based-network-partitioning-input.jpg" width="300"/>
+<img src="https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/images/Capacity-based-partitioning-input.jpg?raw=true" width="300"/>
 
 Typical input: 
 
@@ -71,13 +73,7 @@ Typical input:
 
 ### Output
 
-Compare the result with theissen polygons.
-
-<img src="https://github.com/JingzongWang/Arcpy-network-partitionging/blob/main/images/Distance-based-network-partitioning-result.jpg" width="300"/>
-
-black solid-line - Network-based Partitions
-
-pink dash-line - Thiessen Polygons
+<img src="https://github.com/JingzongWang/Arcpy-network-partitioning/blob/main/images/Capacity-based-partitioning-output.jpg?raw=true" width="300"/>
 
 
 

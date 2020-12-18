@@ -24,8 +24,9 @@ try:
 
 
     # Create a list of all objectID
-    def id_to_list(fc, field):
+    def id_to_list(fc):
         res = []
+        field = arcpy.ListFields(fc)[0].name
         features_enum = arcpy.SearchCursor(fc)
         for feature in features_enum:
             res.append(feature.getValue(field))
@@ -33,23 +34,23 @@ try:
         return res 
     
     # Create service area polygon for given facilities from a network
-    def service_area(fac_ids, output, facilities, 
-                    field_name, sa_layer_obj, point_barriers = None):
+    def service_area(fac_ids, output, facilities, sa_layer_obj, point_barriers = None):
         # SublyerNames
         sublayer_names = arcpy.na.GetNAClassNames(sa_layer_obj)                             
         sa_fac_lyr_name = sublayer_names["Facilities"]
         sa_barriers_lyr_name = sublayer_names["Barriers"]
-        sa_polygons_lyr_name = sublayer_names["sa_polygons"]
+        sa_polygons_lyr_name = sublayer_names["SAPolygons"]
         sa_polygons = sa_layer_obj.listLayers(sa_polygons_lyr_name)[0]    
 
         # Reset
         arcpy.Delete_management(output)
         arcpy.DeleteFeatures_management(sa_fac_lyr_name)
-        arcpy.DeleteFeatures_management(v)      
+        arcpy.DeleteFeatures_management(sa_barriers_lyr_name)      
 
         # Load facilities.
-        arcpy.SelectLayerByAttribute_management(facilities, 
-                                    "NEW_SELECTION", 
+        
+        field_name = arcpy.ListFields(facilities)[0].name
+        arcpy.SelectLayerByAttribute_management(facilities, "NEW_SELECTION", 
                                     field_name + " IN (" + str(fac_ids)[1:-1] + ")")    
         arcpy.na.AddLocations(sa_layer_obj, sa_fac_lyr_name, facilities)
 
@@ -63,13 +64,12 @@ try:
         # Copy service area to output feature class
         arcpy.CopyFeatures_management(sa_polygons, output)      
 
-        return
 
     # Create boundary points between target point and other points, 
     # such that for each boundary points the impedence to target point 
     # and closest point is equal.
     def create_boundary_points(target_id, others_id_list, output,
-                            points_layer,  field_name,  cf_layer_Obj,  
+                            points_layer, cf_layer_Obj,  
                             reset_barriers = False,         
                             point_barriers = None):
         # Sublayer names
@@ -85,6 +85,7 @@ try:
             arcpy.DeleteFeatures_management(cfBarriers_lyr_name)
 
         # Load facilities 
+        field_name = arcpy.ListFields(points_layer)[0].name
         arcpy.SelectLayerByAttribute_management(points_layer, "NEW_SELECTION", 
                             field_name + " IN (" + str(others_id_list)[1:-1] + ")" )        
         arcpy.na.AddLocations(cf_layer_Obj, cfFacilities_lyr_name, points_layer)
@@ -123,7 +124,6 @@ try:
         # Copy barriers layer as boundary points to outputFC
         arcpy.CopyFeatures_management(cf_layer_Obj.listLayers()[2], output)
 
-        return
 
 
     def dist_based_nt_partitioning(facilities, st_network, output, 
@@ -170,7 +170,7 @@ try:
             
             # Create boundary points for current facility and add them to boundary_points
             create_boundary_points(current_id, remain_ids, boundary_points,
-                                fac_layer,  idfield_name, cf_lyr_obj)
+                                fac_layer, cf_lyr_obj)
 
 
         # Create a new service area analysis layer
@@ -183,13 +183,15 @@ try:
         # Solve partitions for all facilities with boundary point
         # from previous step as barriers
         service_area(all_ids, output, fac_layer, 
-                    idfield_name, sa_lyr_obj, point_barriers = boundary_points)
+                     sa_lyr_obj, point_barriers = boundary_points)
         # Join the facilities information back to partitions and create output file.
         arcpy.SpatialJoin_analysis(partitions, fac_layer,
                                    os.path.join(workspace, output))
-        try: arcpy.Delete_management([partitions, fac_layer, boundary_points, 
-                                     cf_lyr_obj, sa_lyr_obj])
-    	except: pass
+        try: 
+            arcpy.Delete_management(partitions)
+            arcpy.Delete_management(fac_layer)
+            arcpy.Delete_management(boundary_points)
+        except: pass
 
     arcpy.env.workspace = workspace
 
